@@ -16,3 +16,7 @@ g++ smart_pointers.cpp -o smart ; ./$_
 OR
 g++ smart_pointers.cpp -o smart ; ./smart
 ```
+
+# References
++ [Size of struct](https://www.geeksforgeeks.org/is-sizeof-for-a-struct-equal-to-the-sum-of-sizeof-of-each-member/)
++ [void* in cpp](https://www.geeksforgeeks.org/void-pointer-c-cpp/)
