@@ -15,6 +15,22 @@ struct Payload {
   string s;
 } Str;
 
+unique_ptr<Payload> baz() {
+  unique_ptr<Payload> baz =
+      make_unique<Payload>(Payload{'s', 10, 'd', 10, true, "SandorDargo"});
+  return baz;
+}
+
+void foo(unique_ptr<Payload> up) { 
+     cout << (*up.get()).c << "\n"; 
+     cout << (*up).i << "\n"; 
+     cout << (*up.get()).r << "\n"; 
+     cout << (*up).y << "\n"; 
+     cout << (*up.get()).b << "\n"; 
+     cout << (*up).s << "\n"; 
+
+}
+
 int main() {
   Payload *payload = new Payload{'c', 60, 'r', 90, false, "sex"};
   Payload payloadd{'c', 70, 'r', 90, true, "sex"};
@@ -61,5 +77,9 @@ int main() {
        << "\n"; // 1
   cout << "dummyPtr->s -> " << (*static_cast<Payload *>(dummyPtr)).s
        << "\n"; // sex
+  cout << "=============================================================\n";
+  auto p = baz();
+  // foo(p); // error: use of deleted function
+  foo(move(p));
   cout << "=============================================================\n";
 }
