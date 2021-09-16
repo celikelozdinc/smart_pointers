@@ -21,14 +21,13 @@ unique_ptr<Payload> baz() {
   return baz;
 }
 
-void foo(unique_ptr<Payload> up) { 
-     cout << (*up.get()).c << "\n"; 
-     cout << (*up).i << "\n"; 
-     cout << (*up.get()).r << "\n"; 
-     cout << (*up).y << "\n"; 
-     cout << (*up.get()).b << "\n"; 
-     cout << (*up).s << "\n"; 
-
+void foo(unique_ptr<Payload> up) {
+  cout << (*up.get()).c << "\n";
+  cout << (*up).i << "\n";
+  cout << (*up.get()).r << "\n";
+  cout << (*up).y << "\n";
+  cout << (*up.get()).b << "\n";
+  cout << (*up).s << "\n";
 }
 
 int main() {
