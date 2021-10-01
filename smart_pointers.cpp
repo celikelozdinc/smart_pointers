@@ -13,6 +13,9 @@ struct Payload {
   int y;
   bool b;
   string s;
+  Payload() : c('c'), i(-1), r('r'), y(-1), b(false), s("string") {}
+  Payload(char c, int i, char r, int y, bool b, string s)
+      : c(c), i(i), r(r), y(y), b(b), s(s) {}
 } Str;
 
 unique_ptr<Payload> baz() {
@@ -28,6 +31,11 @@ void foo(unique_ptr<Payload> up) {
   cout << (*up).y << "\n";
   cout << (*up.get()).b << "\n";
   cout << (*up).s << "\n";
+}
+
+void bar(std::unique_ptr<Payload> p) {
+  std::cout << p->i << "\n";
+  std::cout << p->y << "\n";
 }
 
 int main() {
@@ -81,4 +89,13 @@ int main() {
   // foo(p); // error: use of deleted function
   foo(move(p));
   cout << "=============================================================\n";
+  /**
+   * unique_ptr is movable only, it should be passed with std::move to
+   * explicitly express the ownership transfer
+   *
+   */
+  auto myP = make_unique<Payload>();
+  bar(std::move(myP));
+  // std::cout << myP->i <<"\n"; //seg fault
+  // std::cout << myP->y <<"\n"; //seg fault
 }

@@ -23,3 +23,4 @@ g++ smart_pointers.cpp -o smart ; ./smart
 + [void* in cpp](https://www.geeksforgeeks.org/void-pointer-c-cpp/)
 + [const and unique_ptr by Sandor Dargo](https://dev.to/sandordargo/const-and-smart-pointers-1hn1)
 + [smart pointers](https://medium.com/codex/everything-you-need-to-know-about-smart-pointers-in-c-3a92c9dcd532)
++ [ref card](https://www.cppstories.com/2021/smart-ptr-ref-card/)
