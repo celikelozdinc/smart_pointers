@@ -54,48 +54,46 @@ int main() {
 
   size_t sizeOfStruct = sizeof(*uniquePtr.get());
   std::cout << "Size of *uniquePtr.get() : " << sizeOfStruct << "\n"; // 56
-  std::cout << "=============================================================\n";
+  std::cout << "===================================================\n";
   /*
   cout << "uniquePtr -> " << uniquePtr << "\n";                   // 0x126b6c0
   */
-  std::cout << "uniquePtr.get() -> " << uniquePtr.get() << "\n";       // 0x126b6c0
+  std::cout << "uniquePtr.get() -> " << uniquePtr.get() << "\n"; // 0x126b6c0
   std::cout << "sizeof(uniquePtr) -> " << sizeof(uniquePtr) << "\n";   // 8
   std::cout << "sizeof(*uniquePtr) -> " << sizeof(*uniquePtr) << "\n"; // 56
-  std::cout << "sizeof(uniquePtr.get()) -> " << sizeof(uniquePtr.get()) << "\n"; // 8
+  std::cout << "sizeof(uniquePtr.get()) -> " << sizeof(uniquePtr.get())
+            << "\n"; // 8
   std::cout << "sizeof(*uniquePtr.get()) -> " << sizeof(*uniquePtr.get())
-       << "\n";                                                       // 56
+            << "\n";                                                       // 56
   std::cout << "(*uniquePtr.get()).i -> " << (*uniquePtr.get()).i << "\n"; // 17
-  std::cout << "(*uniquePtr.get()).s -> " << (*uniquePtr.get()).s << "\n"; // sex
-  std::cout << "=============================================================\n";
+  std::cout << "(*uniquePtr.get()).s -> " << (*uniquePtr.get()).s
+            << "\n"; // sex
+  std::cout << "===================================================\n";
   std::cout << "unique.get() -> " << unique.get() << "\n";       // 0x126bb60
   std::cout << "*(unique.get()) -> " << *(unique.get()) << "\n"; // 0x126bb60
   size_t size = sizeof(*unique.get());
   std::cout << size << "\n";
-  std::cout << "=============================================================\n";
+  std::cout << "===================================================\n";
   std::cout << "sizeof(Str) -> " << sizeof(Str) << "\n"; // 56
-  std::cout << "=============================================================\n";
+  std::cout << "===================================================\n";
   std::cout << "sizeof(payloadd) -> " << sizeof(payloadd) << "\n"; // 56
-  std::cout << "=============================================================\n";
+  std::cout << "===================================================\n";
+  // cast to void* and then cast back to Payload* again
   void *dummyPtr = malloc(sizeof(Str));
   memcpy(dummyPtr, uniquePtr.get(), sizeof(Str));
-  std::cout << "dummyPtr -> " << dummyPtr << "\n"; // 0x126b700
-  std::cout << "dummyPtr->c -> " << (*static_cast<Payload *>(dummyPtr)).c
-       << "\n"; // o
-  std::cout << "dummyPtr->i -> " << (*static_cast<Payload *>(dummyPtr)).i
-       << "\n"; // 17
-  std::cout << "dummyPtr->r -> " << (*static_cast<Payload *>(dummyPtr)).r
-       << "\n"; // c
-  std::cout << "dummyPtr->y -> " << (*static_cast<Payload *>(dummyPtr)).y
-       << "\n"; // 91
-  std::cout << "dummyPtr->b -> " << (*static_cast<Payload *>(dummyPtr)).b
-       << "\n"; // 1
-  std::cout << "dummyPtr->s -> " << (*static_cast<Payload *>(dummyPtr)).s
-       << "\n"; // sex
-  std::cout << "=============================================================\n";
+  Payload *dummyPayloadPtr = static_cast<Payload *>(dummyPtr);
+  std::cout << "dummyPayloadPtr -> " << dummyPayloadPtr << "\n"; // 0x126b700
+  std::cout << "dummyPayloadPtr->c -> " << (*dummyPayloadPtr).c << "\n"; // o
+  std::cout << "dummyPayloadPtr->i -> " << (*dummyPayloadPtr).i << "\n"; // 17
+  std::cout << "dummyPayloadPtr->r -> " << (*dummyPayloadPtr).r << "\n"; // c
+  std::cout << "dummyPayloadPtr->y -> " << (*dummyPayloadPtr).y << "\n"; // 91
+  std::cout << "dummyPayloadPtr->b -> " << (*dummyPayloadPtr).b << "\n"; // 1
+  std::cout << "dummyPayloadPtr->s -> " << (*dummyPayloadPtr).s << "\n"; // sex
+  std::cout << "===================================================\n";
   auto p = baz();
   // foo(p); // error: use of deleted function
   foo(move(p));
-  std::cout << "=============================================================\n";
+  std::cout << "===================================================\n";
   /**
    * unique_ptr is movable only, it should be passed with std::move to
    * explicitly express the ownership transfer
@@ -105,6 +103,8 @@ int main() {
   bar(std::move(myP));
   // std::cout << myP->i <<"\n"; //seg fault
   // std::cout << myP->y <<"\n"; //seg fault
+
+  std::cout << "===================================================\n";
 
   /**
    * Examples from
@@ -128,4 +128,6 @@ int main() {
   std::cout << "in main() : sharedWidget.use_count() == "
             << sharedWidget.use_count() << " (object @ " << sharedWidget
             << ")\n";
+
+  std::cout << "===================================================\n";
 }
