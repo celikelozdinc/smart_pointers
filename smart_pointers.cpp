@@ -6,19 +6,53 @@
 
 #include "definitions.h"
 
+/**
+ * @brief  Passing unique_ptr by value means “sink.”
+ *
+ * This is the preferred way to express a widget-consuming function, also known
+ * as a “sink.
+ *
+ * Passing a unique_ptr by value is only possible by moving the object and its
+ * unique ownership from the caller to the callee.
+ *
+ * @param uniqueWidget
+ */
 void sink(std::unique_ptr<Widget> uniqueWidget) {
   std::cout << "sink() :: Printing member : " << uniqueWidget->member << "\n";
+  Widget *released = uniqueWidget.release();
+  std::cout << "sink() :: Printing member of released : " << released->member
+            << "\n";
 }
 
 /**
  * @brief Take ownership of a Widget
  *
+ * Use a non-const unique_ptr& parameter only to modify the unique_ptr
+ *
+ * When the function is supposed to actually accept an existing unique_ptr and
+ * potentially modify it to refer to a different objec
+ *
  * @param uniqueWidget
  */
 void reseat(std::unique_ptr<Widget> &uniqueWidget) {
   uniqueWidget.reset(new Widget(10));
+  /*
+  Widget *released = uniqueWidget.release();
+  std::cout << "reseat() :: Printing member of released : " << released->member
+            << "\n";
+  */
 }
 
+/**
+ * @brief Passing shared_ptr by value implies taking shared ownership.
+ *
+ * a copy is needed anyway so the copying cost is fine.
+ *
+ *  Express that a function will store and share ownership of a heap object
+ * using a by-value shared_ptr parameter
+ *
+ * @param sharedWidget
+ */
 void share(std::shared_ptr<Widget> sharedWidget) {
   std::cout << "share() :: sharedWidget.use_count() == "
             << sharedWidget.use_count() << " (object @ " << sharedWidget
@@ -114,7 +148,8 @@ int main() {
   auto uniqueWidget = std::make_unique<Widget>(20);
   // sink(uniqueWidget); //=> we can not copy unique ptr
   sink(std::move(uniqueWidget));
-  // std::cout << "struct member after move : " << uniqueWidget->member << "\n";
+  // std::cout << "struct member after moving unique ptr : " <<
+  // uniqueWidget->member << "\n";
 
   auto uWidget = std::make_unique<Widget>(20);
   // reseat(std::move(uniqueWidget)); //=> can not bind rvalue to lvalue

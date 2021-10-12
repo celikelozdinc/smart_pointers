@@ -26,3 +26,4 @@ g++ smart_pointers.cpp -o smart ; ./smart
 + [ref card](https://www.cppstories.com/2021/smart-ptr-ref-card/)
 + [Passing smart pointers by Rainer Grimm](https://www.modernescpp.com/index.php/c-core-guidelines-passing-smart-pointer)
 + [use_count() from cppreference](https://en.cppreference.com/w/cpp/memory/shared_ptr/use_count)
+$ [GotW #91 : Smart Pointer Parameters by Herb Sutter] (https://herbsutter.com/2013/06/05/gotw-91-solution-smart-pointer-parameters/)
