@@ -7,7 +7,7 @@
 #include "definitions.h"
 
 /**
- * @brief  Passing unique_ptr by value means “sink.”
+ * @brief  Passing unique_ptr by value means “sink.”, transfers ownership of the pointer
  *
  * This is the preferred way to express a widget-consuming function, also known
  * as a “sink.
@@ -47,9 +47,13 @@ void reseat(std::unique_ptr<Widget> &uniqueWidget) {
  * @brief Passing shared_ptr by value implies taking shared ownership.
  *
  * a copy is needed anyway so the copying cost is fine.
- *
+ * 
+ * reference counter will be updated.
+ * 
  *  Express that a function will store and share ownership of a heap object
  * using a by-value shared_ptr parameter
+ * 
+ * Such operation is relatively heavy
  *
  * @param sharedWidget
  */
