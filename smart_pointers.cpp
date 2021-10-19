@@ -18,7 +18,9 @@
  * @param uniqueWidget
  */
 void sink(std::unique_ptr<Widget> uniqueWidget) {
-  std::cout << "sink() :: Printing member : " << uniqueWidget->member << "\n";
+  std::cout << "sink() :: Printing member before modification : " << uniqueWidget->member << "\n";
+  uniqueWidget->member = 17;
+  std::cout << "sink() :: Printing member after modification: " << uniqueWidget->member << "\n";
   Widget *released = uniqueWidget.release();
   std::cout << "sink() :: Printing member of released : " << released->member
             << "\n";
