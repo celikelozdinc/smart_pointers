@@ -171,4 +171,7 @@ int main() {
             << ")\n";
 
   std::cout << "===================================================\n";
+  std::cout << "We'll initialize custom deleter for smart pointer: \n";
+  std::unique_ptr<Payload, Free> uniquePtrWithDeleter{new Payload{}};
+  std::cout << "Initialized Payload with custom deleter with member -> " << uniquePtrWithDeleter->s << "\n";
 }
