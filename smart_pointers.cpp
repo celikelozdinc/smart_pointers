@@ -174,4 +174,23 @@ int main() {
   std::cout << "We'll initialize custom deleter for smart pointer: \n";
   std::unique_ptr<Payload, Free> uniquePtrWithDeleter{new Payload{}};
   std::cout << "Initialized Payload with custom deleter with member -> " << uniquePtrWithDeleter->s << "\n";
+
+  std::cout << "===================================================\n";
+  // https://www.demo2s.com/cpp/cpp-smart-pointers-exercise-1.html => Question6
+  std::unique_ptr<Interface> pointerToClient1 = std::make_unique<Client1>();
+  std::unique_ptr<Interface> pointerToClient2 = std::make_unique<Client2>();
+  pointerToClient1->baz();
+  pointerToClient2->baz();
+
+  // https://www.demo2s.com/cpp/cpp-smart-pointers-exercise-1.html => Question4
+  int dataToBeCopied = 10;
+  std::shared_ptr<int> shared1 = std::make_shared<int>(dataToBeCopied);
+  std::shared_ptr<int> shared2, shared3;
+  shared2 = shared1;
+  shared3 = shared1;
+  std::cout <<"SharedPointer1 ref count -> " << shared1.use_count() << "\n";
+  std::cout <<"SharedPointer2 ref count -> " << shared2.use_count() << "\n";
+  std::cout <<"SharedPointer3 ref count -> " << shared3.use_count() << "\n";
+  std::cout << "===================================================\n";
+
 }

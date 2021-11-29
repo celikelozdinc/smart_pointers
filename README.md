@@ -28,3 +28,4 @@ g++ smart_pointers.cpp -o smart ; ./smart
 + [use_count() from cppreference](https://en.cppreference.com/w/cpp/memory/shared_ptr/use_count)
 + [GotW #91 : Smart Pointer Parameters by Herb Sutter](https://herbsutter.com/2013/06/05/gotw-91-solution-smart-pointer-parameters/)
 + [Smart pointers gotchas](https://www.cppstories.com/2013/02/smart-pointers-gotchas/)
++ [Exercises](https://www.demo2s.com/cpp/cpp-smart-pointers-exercise-1.html)

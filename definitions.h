@@ -32,3 +32,25 @@ struct Free {
     std::cout << "freed Payload*\n";
   }
 };
+
+
+class Interface {
+public:
+  Interface() = default;
+  virtual ~Interface() = default;
+  virtual void baz() const noexcept = 0;
+};
+
+class Client1 : public Interface {
+public:
+  void baz() const noexcept override {
+    std::cout << "Client1::baz()\n";
+  }
+};
+
+class Client2 : public Interface {
+public:
+  void baz() const noexcept override {
+    std::cout << "Client2::baz()\n";
+  }
+};
