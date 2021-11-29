@@ -27,12 +27,21 @@ void sink(std::unique_ptr<Widget> uniqueWidget) {
 }
 
 /**
+ * @brief Transfers ownership of the pointer
+ * 
+ * @param ptr 
+ */
+void take_ownership(std::shared_ptr<int> ptr) {
+  std::cout << "take_ownership()::use_count() -> " << ptr.use_count() << "\n";
+}
+
+/**
  * @brief Take ownership of a Widget
  *
  * Use a non-const unique_ptr& parameter only to modify the unique_ptr
  *
  * When the function is supposed to actually accept an existing unique_ptr and
- * potentially modify it to refer to a different objec
+ * potentially modify it to refer to a different object
  *
  * @param uniqueWidget
  */
@@ -65,10 +74,6 @@ void share(std::shared_ptr<Widget> sharedWidget) {
             << ")\n";
 }
 
-
-void take_ownership(std::shared_ptr<int> ptr) {
-  std::cout << "take_ownership()::use_count() -> " << ptr.use_count() << "\n";
-}
 
 std::unique_ptr<Payload> baz() {
   std::unique_ptr<Payload> baz =

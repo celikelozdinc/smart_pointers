@@ -1,3 +1,7 @@
+# Reminders
++ std::unique_ptr &rarr; That will only permit one owner of the pointer
++ std::shared_ptr &rarr; If you want to deal with multiple owners. Maintains a reference count of all the pointers which point to the object
+
 # Aim of this repository
 + sizeof with struct
 + sizeof with pointer to _struct_
@@ -19,6 +23,7 @@ g++ smart_pointers.cpp -o smart ; ./smart
 ```
 
 # References
++ [Definitions](https://www.journaldev.com/37481/smart-pointers-in-c-plus-plus)
 + [Size of struct](https://www.geeksforgeeks.org/is-sizeof-for-a-struct-equal-to-the-sum-of-sizeof-of-each-member/)
 + [void* in cpp](https://www.geeksforgeeks.org/void-pointer-c-cpp/)
 + [const and unique_ptr by Sandor Dargo](https://dev.to/sandordargo/const-and-smart-pointers-1hn1)
