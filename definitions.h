@@ -54,3 +54,30 @@ public:
     std::cout << "Client2::baz()\n";
   }
 };
+
+
+
+class C1{
+private:
+  //double* d; OLD WAY
+  std::shared_ptr<double> d;
+public:
+  explicit C1(std::shared_ptr<double> value) : d(value) {
+    std::cout << "C1 constructor -> ref count : "<< d.use_count() <<"\n";
+    }
+  virtual ~C1() { std::cout << "\nC1 destructor\n";}
+  void print() const { std::cout << "Value " << *d; }
+};
+
+
+class C2{
+private:
+  //double* d; OLD WAY
+  std::shared_ptr<double> d;
+public:
+  C2(std::shared_ptr<double> value) : d(value) {
+    std::cout << "C2 constructor -> ref count : "<< d.use_count() <<"\n";
+    }
+  virtual ~C2() { std::cout << "\nC2 destructor\n";}
+  void print() const { std::cout << "Value " << *d; }
+};

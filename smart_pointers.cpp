@@ -65,6 +65,11 @@ void share(std::shared_ptr<Widget> sharedWidget) {
             << ")\n";
 }
 
+
+void take_ownership(std::shared_ptr<int> ptr) {
+  std::cout << "take_ownership()::use_count() -> " << ptr.use_count() << "\n";
+}
+
 std::unique_ptr<Payload> baz() {
   std::unique_ptr<Payload> baz =
       std::make_unique<Payload>(Payload{'s', 10, 'd', 10, true, "SandorDargo"});
@@ -188,9 +193,27 @@ int main() {
   std::shared_ptr<int> shared2, shared3;
   shared2 = shared1;
   shared3 = shared1;
-  std::cout <<"SharedPointer1 ref count -> " << shared1.use_count() << "\n";
-  std::cout <<"SharedPointer2 ref count -> " << shared2.use_count() << "\n";
-  std::cout <<"SharedPointer3 ref count -> " << shared3.use_count() << "\n";
+  std::cout <<"SharedPointer1 ref count -> " << shared1.use_count() << "\n"; //=> keeping track of the number of shared owners
+  std::cout <<"SharedPointer2 ref count -> " << shared2.use_count() << "\n"; //=> keeping track of the number of shared owners
+  std::cout <<"SharedPointer3 ref count -> " << shared3.use_count() << "\n"; //=> keeping track of the number of shared owners
+  take_ownership(std::move(shared1));
+  std::cout <<"SharedPointer1 ref count -> " << shared1.use_count() << "\n"; //=> keeping track of the number of shared owners
+  std::cout <<"SharedPointer2 ref count -> " << shared2.use_count() << "\n"; //=> keeping track of the number of shared owners
+  std::cout <<"SharedPointer3 ref count -> " << shared3.use_count() << "\n"; //=> keeping track of the number of shared owners
+  take_ownership(std::move(shared2));
+  std::cout <<"SharedPointer1 ref count -> " << shared1.use_count() << "\n"; //=> keeping track of the number of shared owners
+  std::cout <<"SharedPointer2 ref count -> " << shared2.use_count() << "\n"; //=> keeping track of the number of shared owners
+  std::cout <<"SharedPointer3 ref count -> " << shared3.use_count() << "\n"; //=> keeping track of the number of shared owners
+  std::cout << "===================================================\n";
+  // https://www.datasim.nl/application/files/6815/3777/1447/Exercise_3_Smart_Pointers.pdf => Question2
+  std::shared_ptr<double> data = std::make_shared<double>(23.0);
+  std::cout << "data ref count before C1() -> " << data.use_count() << "\n"; //=> keeping track of the number of shared owners
+  C1 object1(data);
+  std::cout << "data ref count after C1(), before C2()  -> " << data.use_count() << "\n"; //=> keeping track of the number of shared owners
+  C2 object2(data);
+  std::cout << "data ref count after C2(), before C2(std::move())  -> " << data.use_count() << "\n"; //=> keeping track of the number of shared owners
+  C2 obj2(std::move(data));
+  std::cout << "data ref count after C2(std::move())  -> " << data.use_count() << "\n"; //=> keeping track of the number of shared owners
   std::cout << "===================================================\n";
 
 }
