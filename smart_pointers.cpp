@@ -222,6 +222,8 @@ int main() {
   std::cout << "===================================================\n";
   std::unique_ptr<Base> polymorphic = std::make_unique<Derived>(10);
   polymorphic->display();
+  std::unique_ptr<Base> polymorphic_next = std::make_unique<Derived>();
+  polymorphic_next->display();
   std::cout << "===================================================\n";
 
 }

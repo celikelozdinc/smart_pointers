@@ -88,8 +88,11 @@ struct Base {
   virtual void display() const {
     std::cout << "Base::Display() => " << m_base << "\n";
   }
-  Base() : m_base{0} {
+  Base() : m_base{-1} {
     std::cout << "Base::Base()\n";
+  }
+  Base(int j) : m_base{j} {
+    std::cout << "Base::Base(int)\n";
   }
 };
 
@@ -101,7 +104,7 @@ struct Derived : public Base {
   Derived() : m_derived{-1} {
     std::cout << "Derived::Derived()\n";
   }
-  Derived(int j) {
+  Derived(int j) : Base(j) { 
     std::cout << "Derived::Derived(int)\n";
     m_base = j;
     m_derived = j;
