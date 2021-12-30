@@ -81,3 +81,29 @@ public:
   virtual ~C2() { std::cout << "\nC2 destructor\n";}
   void print() const { std::cout << "Value " << *d; }
 };
+
+
+struct Base {
+  int m_base;
+  virtual void display() const {
+    std::cout << "Base::Display() => " << m_base << "\n";
+  }
+  Base() : m_base{0} {
+    std::cout << "Base::Base()\n";
+  }
+};
+
+struct Derived : public Base {
+  int m_derived;
+  void display() const override {
+    std::cout << "Derived::Display() => " << m_derived << "\n";
+  }
+  Derived() : m_derived{-1} {
+    std::cout << "Derived::Derived()\n";
+  }
+  Derived(int j) {
+    std::cout << "Derived::Derived(int)\n";
+    m_base = j;
+    m_derived = j;
+  }
+};

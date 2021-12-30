@@ -220,5 +220,8 @@ int main() {
   C2 obj2(std::move(data));
   std::cout << "data ref count after C2(std::move())  -> " << data.use_count() << "\n"; //=> keeping track of the number of shared owners
   std::cout << "===================================================\n";
+  std::unique_ptr<Base> polymorphic = std::make_unique<Derived>(10);
+  polymorphic->display();
+  std::cout << "===================================================\n";
 
 }
