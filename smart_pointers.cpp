@@ -14,7 +14,9 @@
  *
  * Passing a unique_ptr by value is only possible by moving the object and its
  * unique ownership from the caller to the callee.
- *
+ * 
+ * Client Code(main) moves ownership to Library Function
+ * 
  * @param uniqueWidget
  */
 void sink(std::unique_ptr<Widget> uniqueWidget) {
@@ -42,6 +44,8 @@ void take_ownership(std::shared_ptr<int> ptr) {
  *
  * When the function is supposed to actually accept an existing unique_ptr and
  * potentially modify it to refer to a different object
+ * 
+ * Ownership remains in Client Code(main)
  *
  * @param uniqueWidget
  */
@@ -163,7 +167,7 @@ int main() {
    */
   auto uniqueWidget = std::make_unique<Widget>(20);
   // sink(uniqueWidget); //=> we can not copy unique ptr
-  sink(std::move(uniqueWidget));
+  sink(std::move(uniqueWidget));  //=> moves ownership to Library Function
   // std::cout << "struct member after moving unique ptr : " <<
   // uniqueWidget->member << "\n";
 
@@ -171,7 +175,8 @@ int main() {
   // reseat(std::move(uniqueWidget)); //=> can not bind rvalue to lvalue
   // reference
   std::cout << "struct member before reseat : " << uWidget->member << "\n";
-  reseat(uWidget); //=> a lvalue can be bound to lvalue reference
+  reseat(uWidget);  //=> a lvalue can be bound to lvalue reference
+                    //=> ownership remains in Client Code(main)
   std::cout << "struct member after reseat : " << uWidget->member << "\n";
 
   auto sharedWidget = std::make_shared<Widget>(80);

@@ -35,3 +35,4 @@ g++ smart_pointers.cpp -o smart ; ./smart
 + [Smart pointers gotchas](https://www.cppstories.com/2013/02/smart-pointers-gotchas/)
 + [Exercises](https://www.demo2s.com/cpp/cpp-smart-pointers-exercise-1.html)
 + [Smart Pointer Exercises](https://www.datasim.nl/application/files/6815/3777/1447/Exercise_3_Smart_Pointers.pdf)
++ [Inbal Levi on Meeting C++ online](https://www.youtube.com/watch?v=XU-dujj72SM)
