@@ -99,6 +99,12 @@ void bar(std::unique_ptr<Payload> p) {
   std::cout << p->y << "\n";
 }
 
+void process_buffers(std::unique_ptr<int[]>& ints, int* buf, size_t size) {
+  for (uint8_t ind{0}; ind < size ; ind++) {
+    std::cout << ints.get()[ind] << " <--> " << buf[ind] << "\n";
+  }
+}
+
 int main() {
   Payload *payload = new Payload{'c', 60, 'r', 90, false, "sex"};
   Payload payloadd{'c', 70, 'r', 90, true, "sex"};
@@ -229,6 +235,18 @@ int main() {
   polymorphic->display();
   std::unique_ptr<Base> polymorphic_next = std::make_unique<Derived>();
   polymorphic_next->display();
+  std::cout << "===================================================\n";
+  static constexpr int size_arr = 5;
+  auto integers = std::make_unique<int[]>(size_arr);
+  int* buffer = new int[size_arr];
+  int ind{0};
+  // The unique_ptr also has an overloaded operator [] to access the array elements by index:
+  for (int value{4}; value >= 0 ; value--) {
+    integers.get()[ind] = value;
+    buffer[ind] = value;
+    ind++;
+  }
+  process_buffers(integers, buffer, 5);
   std::cout << "===================================================\n";
 
 }
