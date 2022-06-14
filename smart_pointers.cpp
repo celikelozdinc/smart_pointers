@@ -17,6 +17,9 @@
  * 
  * Client Code(main) moves ownership to Library Function
  * 
+ * Functions taking owning pointers `by value` are called as `sinks`
+ * A unique_otr sink clearly conveys the `transfer of ownership`
+ * 
  * @param uniqueWidget
  */
 void sink(std::unique_ptr<Widget> uniqueWidget) {
